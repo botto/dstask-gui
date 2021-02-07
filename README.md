@@ -27,7 +27,13 @@ For development the app is broken in to 2 pieces
 - Frontend end client
 - Backend API server
 
-To start them you can use `make debug` or if you want to start them individually, look below.
+To run the frontend client you will need nodejs and yarn.
+Nodejs can either be installed through your OS package manager or using [nvm](https://github.com/nvm-sh/nvm)
+Yarn can be installed with npm once you have node in stalled `npm -g install yarn`
+
+To run the backend API you will need golang, this can be installed through your OS package manager.
+
+Once those two dependencies are installed you can use `make debug` or if you want to start them individually, look below.
 
 ### Frontend
 
