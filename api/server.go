@@ -15,6 +15,7 @@ import (
 
 var router = gin.Default()
 var dstaskConfig = &dstask.Config{}
+var state dstask.State
 
 // Start launches the HTTP server. This method will not return until the server
 // is shutdown.
@@ -25,6 +26,8 @@ func Start(configIn dstask.Config) {
 	gin.SetMode(env)
 
 	dstaskConfig = &configIn
+	// Load state for getting and setting ctx
+	state = dstask.LoadState(dstaskConfig.StateFile)
 
 	listenString := fmt.Sprintf(":%v", port)
 
