@@ -12,13 +12,13 @@ It's very early days still and expect bugs (possibly destroying your entire task
 
 ## Todo
 
-[ ] Complete basic CRUD API  
-[ ] Priorities (filter and add to task)  
-[ ] Templates (add to task and show templates)  
-[ ] Tags (filter and add to task)  
-[ ] Contexts (filter and add to task)  
-[ ] Project (filter and add to task)  
-[ ] State (filter and set on task)  
+- [ ] Complete basic CRUD API  
+- [ ] Priorities (filter and add to task)  
+- [ ] Templates (add to task and show templates)  
+- [ ] Tags (filter and add to task)  
+- [ ] Contexts (filter and add to task)  
+- [ ] Project (filter and add to task)  
+- [ ] State (filter and set on task)  
 
 ## Dev setup
 
