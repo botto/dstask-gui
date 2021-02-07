@@ -45,8 +45,8 @@ yarn run start
 
 The backend app is a simple go http api that has handlers to call dstask library function.
 
-At the moment the backend relies on a modified version of `dstask` that includes tweaks so that dstask behaves better when used a lib.
-The advised way is to clone the modified version `git clone --branch lib-tweaks github.com/botto/dstask.git` and update the replace line in go mod to point to the correct path of the lib tweaks version.
+At the moment the backend relies on a modified version of `dstask` that includes tweaks so that dstask behaves better when used as a lib.
+The advised way is to clone the modified version `git clone --branch lib-tweaks https://github.com/botto/dstask.git` and update the replace line in go mod to point to the correct path of the lib tweaks version.
 
 To start the BE API:
 
