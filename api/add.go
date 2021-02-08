@@ -7,7 +7,8 @@ import (
 	"github.com/naggie/dstask"
 )
 
-type AddTaskPost struct {
+// AddTask is fields for new task
+type AddTask struct {
 	Text     string
 	Tags     []string
 	Project  string
@@ -16,7 +17,7 @@ type AddTaskPost struct {
 }
 
 func addTaskHandler(c *gin.Context) {
-	var postData AddTaskPost
+	var postData AddTask
 
 	// Unpack JSON data
 	if err := c.BindJSON(&postData); err != nil {
