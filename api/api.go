@@ -21,6 +21,6 @@ func apiRoutes(router *gin.Engine) {
 		})
 	}
 
-	apiGroup.GET("/", getTasks)
+	apiGroup.GET("/", getTasksHandler)
 	apiGroup.POST("/", addTaskHandler)
 }

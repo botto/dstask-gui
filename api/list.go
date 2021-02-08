@@ -7,7 +7,7 @@ import (
 	"github.com/naggie/dstask"
 )
 
-func getTasks(c *gin.Context) {
+func getTasksHandler(c *gin.Context) {
 	ts, err := dstask.LoadTaskSet(
 		dstaskConfig.Repo,
 		dstaskConfig.IDsFile,
