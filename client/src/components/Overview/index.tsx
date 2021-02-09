@@ -1,31 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useQuery } from "react-query";
 import { api } from '../../api/API';
 import { Task } from '../../api/types';
-import { usePeriodic } from '../../lib/hook-use-periodic';
 import AddTask from '../AddTask';
 import TaskItem from '../TaskItem';
 
 const Overview = React.memo(() => {
-  const [taskList, setTaskList] = useState<Task[]>([]);
+  const {data:taskList, error, refetch} = useQuery<Task[], Error>('taskList', async() => await api.getTasks(), {refetchInterval: 5000})
 
-  const update = async () => {
-    try {
-      const list = await api.getTasks();
-      setTaskList(list);
-    }
-    catch (err) {
-      window.alert(err)
-    }
-  };
-
-  usePeriodic(() => update(), 5000);
+  if (error) {
+    return (<div>Error Loading Task List: {error.message}</div>)
+  }
 
   return (
     <div>
-      { taskList.length > 0 &&
-        taskList.map((t: Task, i: number) => <TaskItem key={i} task={t} onChange={ update } />)
+      { taskList !== undefined && taskList.length > 0 &&
+        taskList.map((t: Task, i: number) => <TaskItem key={ i } task={ t } onChange={ refetch }/>)
       }
-      <AddTask onAdd={update} />
+      <AddTask onAdd={ refetch } />
     </div>
   )
 });
