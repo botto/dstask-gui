@@ -24,4 +24,5 @@ func apiRoutes(router *gin.Engine) {
 	apiGroup.GET("/", getTasksHandler)
 	apiGroup.POST("/", addTaskHandler)
 	apiGroup.DELETE("/:id", removeTaskHandler)
+	apiGroup.POST("/:id/done", doneTaskHandler)
 }
