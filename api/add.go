@@ -34,7 +34,7 @@ func addTaskHandler(c *gin.Context) {
 	)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
-			"error":  "failed to add task",
+			"error":  "failed to load task set",
 			"detail": err,
 		})
 	}

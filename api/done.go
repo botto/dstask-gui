@@ -3,12 +3,13 @@ package api
 import (
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/naggie/dstask"
 )
 
-func removeTaskHandler(c *gin.Context) {
+func doneTaskHandler(c *gin.Context) {
 	idString := c.Param("id")
 	id, err := strconv.Atoi(idString)
 
@@ -42,13 +43,14 @@ func removeTaskHandler(c *gin.Context) {
 		return
 	}
 
-	// Mark task as deleted
-	task.Deleted = true
+	// Mark task as done
+	task.Status = dstask.STATUS_RESOLVED
+	task.Resolved = time.Now()
 
 	ts.UpdateTask(*task)
 	// TODO: Fix this so we don't have exit fails futher down the tree
 	ts.SavePendingChanges()
 
-	dstask.GitCommit(dstaskConfig.Repo, "Removed: %s", task)
+	dstask.GitCommit(dstaskConfig.Repo, "Resolved: %s", task)
 	c.Status(204)
 }
