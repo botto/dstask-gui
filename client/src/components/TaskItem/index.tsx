@@ -4,20 +4,20 @@ import { api } from '../../api/API';
 import { Task } from '../../api/types';
 import styles from './styles.module.sass';
 
-const RightButtons = React.memo((props: { id: number, onDelete: () => void }) => {
-  const deleteTask = async () => {
+const RightButtons = React.memo((props: { id: number, onDone: () => void }) => {
+  const doneTask = async () => {
     if (!isNaN(props.id)) {
-      await api.deleteTask(props.id);
-      props.onDelete();
+      await api.doneTask(props.id);
+      props.onDone();
     }
   };
   return (
     <div>
       <Button
-        intent='danger'
-        onClick={ deleteTask }
-        text='Delete'
-        icon='cross'
+        intent='success'
+        onClick={ doneTask }
+        text='Done'
+        icon='tick'
         minimal={ true }
       />
     </div>
@@ -32,7 +32,7 @@ const TaskItem = (props: { task: Task, onChange: () => void }) => {
         asyncControl={true}
         value={props.task.summary}
         inputRef={txtRef}
-        rightElement={<RightButtons id={ props.task.id } onDelete={ props.onChange } />}
+        rightElement={<RightButtons id={ props.task.id } onDone={ props.onChange } />}
       />
     </div>
   );
