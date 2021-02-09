@@ -24,7 +24,7 @@ const RightButtons = React.memo((props: { id: number, onDone: () => void }) => {
   )
 });
 
-const LeftActions = React.memo((props: {id: number, onDone: () => void}) => {
+export const LeftActions = React.memo((props: {id: number, onDone: () => void}) => {
   const {id, onDone} = props;
   const [isChecked, setChecked] = useState(false);
 
@@ -43,7 +43,7 @@ const LeftActions = React.memo((props: {id: number, onDone: () => void}) => {
 
   return (
     <div>
-      <Checkbox className={ styles.TaskCheckbox } checked={ isChecked } onChange={ onChange } alignIndicator={ Alignment.CENTER } />
+      <Checkbox data-testid="task-done" className={ styles.TaskCheckbox } checked={ isChecked } onChange={ onChange } alignIndicator={ Alignment.CENTER } />
     </div>
   )
 
