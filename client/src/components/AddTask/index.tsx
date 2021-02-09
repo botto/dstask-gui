@@ -1,4 +1,5 @@
 import { Button, InputGroup, Intent } from '@blueprintjs/core';
+import {useMutation} from "react-query";
 import React, { useRef, useState } from 'react';
 import { api } from '../../api/API';
 import { Task } from '../../api/types';
@@ -8,17 +9,23 @@ const AddTask = (props: { onAdd: () => void }) => {
   const newTaskInput = useRef<HTMLInputElement>(null);
   const [ showAdd, setShowAdd ] = useState(false);
 
+  const mutation = useMutation<void, Error, Task>(
+    async (task:Task) => await api.newTask(task), 
+    {
+      onError: (error) => window.alert(error.message),
+      onSuccess: () => {
+        if (newTaskInput.current?.value === undefined) {
+          return
+        }
+        newTaskInput.current.value = '';
+        props.onAdd();
+      },
+    })
+
   const doAdd = async () => {
     if (newTaskInput.current) {
       const task = new Task(newTaskInput.current?.value!);
-      try {
-        await api.newTask(task);
-        newTaskInput.current.value = '';
-        props.onAdd();
-      }
-      catch (e) {
-        window.alert(e)
-      }
+      mutation.mutate(task)
     }
   };
 
