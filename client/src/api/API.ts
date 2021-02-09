@@ -7,10 +7,8 @@ class API extends HttpClient {
   }
 
   public getTasks = () => this.instance.get<Task[]>('/');
-
   public newTask = (task: NewTask) => this.instance.post('/', task);
-  
-  // public getUser = (id: string) => this.instance.get<User>(`/users/${id}`);
+  public deleteTask = (id: number) => this.instance.delete(`/${id}`);
 }
 
 export const api = new API();

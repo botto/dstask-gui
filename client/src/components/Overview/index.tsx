@@ -1,30 +1,12 @@
-import { InputGroup } from '@blueprintjs/core';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { api } from '../../api/API';
 import { Task } from '../../api/types';
 import { usePeriodic } from '../../lib/hook-use-periodic';
 import AddTask from '../AddTask';
-import styles from './styles.module.sass';
-
-const TaskItem = (props: { task: Task }) => {
-  const txtRef = useRef<HTMLInputElement>(null);
-  const onChange = () => {
-    console.log('STUB/handleupdate');
-  }
-  return (
-    <div className={ styles.TaskInput }>
-      <InputGroup
-        asyncControl={ true }
-        value={ props.task.summary }
-        onChange={ onChange }
-        inputRef={ txtRef }
-      />
-    </div>
-  );
-};
+import TaskItem from '../TaskItem';
 
 const Overview = React.memo(() => {
-  const [ taskList, setTaskList ] = useState<Task[]>([]);
+  const [taskList, setTaskList] = useState<Task[]>([]);
 
   const update = async () => {
     try {
@@ -41,9 +23,9 @@ const Overview = React.memo(() => {
   return (
     <div>
       { taskList.length > 0 &&
-        taskList.map((t: Task, i: number) => <TaskItem key={ i } task={ t } />)
+        taskList.map((t: Task, i: number) => <TaskItem key={i} task={t} onChange={ update } />)
       }
-      <AddTask onAdd={ update } />
+      <AddTask onAdd={update} />
     </div>
   )
 });

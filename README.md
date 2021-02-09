@@ -19,6 +19,8 @@ It's very early days still and expect bugs (possibly destroying your entire task
 - [ ] Contexts (filter and add to task)  
 - [ ] Project (filter and add to task)  
 - [ ] State (filter and set on task)  
+- [ ] Add redux toolkit slices
+- [ ] Add toaster for error notification
 
 ## Dev setup
 
