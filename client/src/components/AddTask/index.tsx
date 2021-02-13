@@ -51,7 +51,7 @@ const AddTask = (props: { onAdd: () => void }) => {
   /> : null);
 
   return (
-    <div>
+    <>
       <InputGroup
         placeholder="What are you doing?"
         inputRef={ newTaskInput }
@@ -59,7 +59,7 @@ const AddTask = (props: { onAdd: () => void }) => {
         onChange={ onChange }
         onKeyPress={ onKeyPress }
       />
-    </div>
+    </>
   )
 };
 
