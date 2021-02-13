@@ -1,6 +1,5 @@
 import { Colors } from '@blueprintjs/core';
 import { QueryClient, QueryClientProvider } from "react-query";
-
 import './base.css';
 // Load custom comps after blueprint css.
 import Overview from './components/Overview';
