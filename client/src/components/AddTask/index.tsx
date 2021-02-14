@@ -1,6 +1,6 @@
 import { Button, InputGroup, Intent } from '@blueprintjs/core';
-import {useMutation} from "react-query";
 import React, { useRef, useState } from 'react';
+import { useMutation } from "react-query";
 import { api } from '../../api/API';
 import { Task } from '../../api/types';
 
@@ -20,7 +20,8 @@ const AddTask = (props: { onAdd: () => void }) => {
         newTaskInput.current.value = '';
         props.onAdd();
       },
-    })
+    }
+  );
 
   const doAdd = async () => {
     if (newTaskInput.current) {

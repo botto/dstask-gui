@@ -3,24 +3,35 @@ import React, { useState } from 'react';
 import { api } from '../../api/API';
 import styles from './styles.module.sass';
 
-export const RightActions = React.memo((props: { id: number, onRemove: () => void }) => {
-  const removeTask = async () => {
-    if (!isNaN(props.id)) {
-      await api.removeTask(props.id);
-      props.onRemove();
-    }
-  };
+interface RightActionsProps {
+  id: number
+  isDirty: boolean
+
+  onRemove: () => void
+  onUpdate: () => void
+}
+
+export const RightActions = React.memo((props: RightActionsProps) => {
   return (
-    <div>
+    <>
+      { props.isDirty &&
+        <Button
+          intent='warning'
+          text='Update'
+          minimal={ true }
+          icon='edit'
+          onClick={ props.onUpdate }
+        />
+      }
       <Button
         data-testid="task-remove"
         intent='danger'
-        onClick={ removeTask }
+        onClick={ props.onRemove }
         text='Remove'
         icon='cross'
         minimal={ true }
       />
-    </div>
+    </>
   );
 });
 

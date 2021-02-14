@@ -8,6 +8,7 @@ class API extends HttpClient {
 
   public getTasks = () => this.instance.get<Task[]>('/');
   public removeTask = (id: number) => this.instance.delete(`/${id}`);
+  public updateTask = (id: number, task: Task) => this.instance.post(`/${id}`, task);
 
   // Post endpoint
   public newTask = (task: Task) => this.instance.post('/', task);

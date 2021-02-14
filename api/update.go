@@ -9,14 +9,14 @@ import (
 )
 
 func updateTaskHandler(c *gin.Context) {
-	var postData Task
+	var postData dstask.Task
 	idString := c.Param("id")
 	id, err := strconv.Atoi(idString)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error":  "failed to parse id",
-			"defail": err,
+			"defail": err.Error(),
 		})
 	}
 
@@ -24,7 +24,7 @@ func updateTaskHandler(c *gin.Context) {
 	if err := c.BindJSON(&postData); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error":  "failed to unpack task data",
-			"detail": err,
+			"detail": err.Error(),
 		})
 	}
 
@@ -36,7 +36,7 @@ func updateTaskHandler(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error":  "failed to load task set",
-			"detail": err,
+			"detail": err.Error(),
 		})
 	}
 
@@ -45,12 +45,13 @@ func updateTaskHandler(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error":  "failed to load task",
-			"detail": err,
+			"detail": err.Error(),
 		})
 		return
 	}
 
-	task.Summary = postData.Text
+	task.Summary = postData.Summary
+
 	ts.UpdateTask(*task)
 	// TODO: Fix this so we don't have exit fails futher down the tree
 	ts.SavePendingChanges()
