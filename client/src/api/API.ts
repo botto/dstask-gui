@@ -1,5 +1,5 @@
 import HttpClient from './HttpClient';
-import { NewTask, Task } from './types';
+import { Task } from './types';
 
 class API extends HttpClient {
   public constructor() {
@@ -10,7 +10,7 @@ class API extends HttpClient {
   public removeTask = (id: number) => this.instance.delete(`/${id}`);
 
   // Post endpoint
-  public newTask = (task: NewTask) => this.instance.post('/', task);
+  public newTask = (task: Task) => this.instance.post('/', task);
   public doneTask = (id: number) => this.instance.post(`/${id}/done`);
 }
 

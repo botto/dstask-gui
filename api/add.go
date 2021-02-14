@@ -8,10 +8,10 @@ import (
 )
 
 func addTaskHandler(c *gin.Context) {
-	var postData Task
+	var newTask dstask.Task
 
 	// Unpack JSON data
-	if err := c.BindJSON(&postData); err != nil {
+	if err := c.BindJSON(&newTask); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error":  "failed to unpack task data",
 			"detail": err,
@@ -30,17 +30,9 @@ func addTaskHandler(c *gin.Context) {
 		})
 	}
 
-	task := &dstask.Task{
-		WritePending: true,
-		Status:       dstask.STATUS_PENDING,
-		Summary:      postData.Text,
-		Tags:         postData.Tags,
-		Project:      postData.Project,
-		Priority:     postData.Priority,
-		Notes:        postData.Note,
-	}
-
-	task, err = ts.LoadTask(task)
+	newTask.WritePending = true
+	newTask.Status = dstask.STATUS_PENDING
+	task, err := ts.LoadTask(&newTask)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error":  "failed to add task to taskset",
